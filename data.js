@@ -1,1 +1,11 @@
-var todo = {}
+var todo = [
+
+  {
+    listItem: "Do your Homework"
+
+
+
+},
+
+
+]

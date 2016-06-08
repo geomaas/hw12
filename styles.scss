@@ -1,0 +1,36 @@
+.todoBody {
+  width: 50%;
+
+  background-color: lightblue;
+  margin: 0 auto;
+  padding-bottom: 2%;
+  h1 {
+    text-align: center;
+  }
+}
+
+.todoCards {
+  background-color: white;
+  padding: 1%;
+  width: 75%;
+
+  margin: 0 auto;
+  ul {
+    list-style: none;
+  }
+}
+.todoCompleted {
+  background-color: white;
+  padding: 1%;
+  width: 75%;
+
+  margin: 0 auto;
+  ul {
+    list-style: none;
+  }
+}
+.todoInput {
+  width: 80%;
+  padding: 1%;
+  border-radius: 3px;
+}

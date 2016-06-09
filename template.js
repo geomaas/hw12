@@ -7,10 +7,10 @@ var todoTemplate = {
           </li>
 `,
   edit: `
-          <li data-id='<%= _id %>'>
-            <input type="text" name="name" value="<%= listItem %>">
-            <button class"edit" type="button" name="button">Edit</button>
-            <button class="delete" type="button" name="button">Delete</button>
+          <li id="edit-fields" data-id='<%= _id %>'>
+            <input type="text" name="name" value="">
+            <button class="update" type="button" name="button">Update</button>
+
           </li>
 
   `

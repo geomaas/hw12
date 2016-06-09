@@ -15,9 +15,17 @@ var todoPage = {
   },
   events: function() {
 
+    var countTodo = function(){
+       var remainTodo = $('.todoCards ul li').length;
+       $('.counter').html(remainTodo);
+       console.log(remainTodo);
+     };
+    //  todoPage.updateTodo(countTodo);
+
+
+
     $('.todoSubmit').on('click',function(){
       console.log("SUBMITTED");
-      // var newTodoStr = '<li><input type="checkbox" name="todoitem" value="completed">'
 		  var todoInput = $('.todoInput').val();
       var objectToSaveToDatabase = {
         listItem: todoInput,
@@ -25,10 +33,6 @@ var todoPage = {
       }
 
       todoPage.createTodo(objectToSaveToDatabase)
-		  // console.log(todoInput);
-      // newTodoStr += todoInput + '<button type="button" name="button">Edit</button><button type="button" name="button">Delete</button></li>';
-      // // console.log(newTodoStr);
-      // $('.todoCards ul').append(newTodoStr);
       $('.todoInput').val("");
   	})
     // delete function
@@ -49,7 +53,7 @@ var todoPage = {
        success: function(data) {
          var htmlToAppend = todoPage.htmlGenerator(todoTemplate.edit,data)
          $(that).parent().append(htmlToAppend)
-        //  console.log($(that).parent());
+         console.log($(that).parent());
        },
        error: function(err) {
          console.error("NO LIKEY", err);
@@ -57,6 +61,22 @@ var todoPage = {
      })
 
    })
+   //Submit Edit
+   $('.todoCards').on('click', '.update', function(event) {
+     event.preventDefault();
+     var $edit = $('#edit-fields')
+     var objToUpdate = {
+       id: $edit.data('id'),
+       listItem: $edit.find("input[name='name']").val(),
+
+     }
+     console.log("TEST", objToUpdate)
+     todoPage.updateTodo(objToUpdate)
+     $edit.remove();
+
+
+   })
+
   },
 
 
@@ -73,6 +93,7 @@ var todoPage = {
         console.log(htmlStr);
         $('.todoCards > ul').append(htmlStr);
 
+
       },
       error: function(err) {
         console.error("OH CRAP", err);
@@ -84,7 +105,7 @@ var todoPage = {
     $.ajax({
       method: 'PUT',
       url: todoPage.url + "/" + todo.id,
-      data: blog,
+      data: todo,
       success: function(data) {
         console.log("UPDATED SUCCESSFULLY!!!", data);
         todoPage.getTodo();
@@ -102,7 +123,7 @@ var todoPage = {
       success: function(data) {
         // console.log("WE GOT SOMETHING", data);
         // $('.todoCards ul').html("");
-        $('.todoCards ul').html('');
+        $('.todoCards ul').html('')
         data.forEach(function(element,idx) {
           var todoHtmlStr = todoPage.htmlGenerator(todoTemplate.item,element);
           $('.todoCards ul').append(todoHtmlStr)
